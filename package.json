@@ -1,6 +1,6 @@
 {
-  "name": "clusters",
-  "version": "0.0.4",
+  "name": "geo-clusters",
+  "version": "1.0.1",
   "description": "kmeans clustering in JS",
   "main": "clusters.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/NathanEpstein/clusters.git"
+    "url": "git+https://github.com/NathanEpstein/clusters.git"
   },
   "keywords": [
     "learning",

@@ -5,7 +5,8 @@ var coordinates = data.map(function(obj) {
 }).filter(function(obj) {
   return obj[0] && obj[1]
 })
-var clusterMaker = require('./clusters');
+var clusterMakerClass = require('./clusters');
+var clusterMaker = new clusterMakerClass()
 
 //number of clusters, defaults to undefined
 clusterMaker.k(10);
