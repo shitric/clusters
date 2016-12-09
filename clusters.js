@@ -15,9 +15,14 @@ module.exports = {
     var centroids = pointsAndCentroids.centroids;
 
     return centroids.map(function(centroid) {
+      var _points = points.filter(function(point) { return point.label() == centroid.label() }).map(function(point) { return { location: point.location(), id: point.id } })
+      var clusterInd = _points.map(function(point) {
+        return point.id
+      })
       return {
         centroid: centroid.location(),
-        points: points.filter(function(point) { return point.label() == centroid.label() }).map(function(point) { return point.location() }),
+        // points: _points,
+        clusterInd: clusterInd
       };
     });
   },
@@ -33,8 +38,7 @@ function kmeans(data, config) {
   var k = config.k || Math.round(Math.sqrt(data.length / 2));
   var iterations = config.iterations;
 
-  // initialize point objects with data
-  var points = data.map(function(vector) { return new Point(vector) });
+  var points = data.map(function(vector, i) { return new Point([vector[0], vector[1]], i) });
 
   // intialize centroids randomly
   var centroids = [];
@@ -57,8 +61,9 @@ function kmeans(data, config) {
 };
 
 // objects
-function Point(location) {
+function Point(location, id) {
   var self = this;
+  this.id = id
   this.location = getterSetter(location);
   this.label = getterSetter();
   this.updateLabel = function(centroids) {
